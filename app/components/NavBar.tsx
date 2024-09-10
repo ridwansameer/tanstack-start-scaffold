@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { Button } from './ui/button'
 
 export function NavBar() {
   return (
@@ -18,12 +19,15 @@ export function NavBar() {
             >
               About
             </Link>
+            <Link
+              to="/posts"
+              className="text-gray-800 hover:text-blue-600 transition duration-300 ease-in-out"
+            >
+              Posts
+            </Link>
           </div>
-          <Link
-            to="/login"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out ml-auto"
-          >
-            Login
+          <Link to="/login">
+            <Button>Login</Button>
           </Link>
         </div>
       </div>
