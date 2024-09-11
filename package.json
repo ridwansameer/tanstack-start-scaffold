@@ -12,6 +12,7 @@
     "test:e2e": "playwright test --project=chromium"
   },
   "dependencies": {
+    "@prisma/client": "^5.19.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-router": "^1.56.1",
     "@tanstack/router-devtools": "^1.56.1",
@@ -39,6 +40,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.40",
     "prettier": "^3.3.3",
+    "prisma": "^5.19.1",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.5.3",
     "vite": "^5.3.5",
