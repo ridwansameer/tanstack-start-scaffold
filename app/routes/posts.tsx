@@ -1,17 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { BellRing, Check } from 'lucide-react'
-
-import { cn } from '~/utils/ui'
 import { Button } from '~/components/ui/button'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '~/components/ui/card'
 import { PostComponent } from '~/components/PostComponent'
+import { Textarea } from '~/components/ui/textArea'
 
 export const Route = createFileRoute('/posts')({
   component: Posts,
@@ -41,15 +38,31 @@ const posts = [
   },
 ]
 
-type CardProps = React.ComponentProps<typeof Card>
-
-export function Posts({ className, ...props }: CardProps) {
+export function Posts() {
+  const renderAddPost = () => {
+    return (
+      <div className="mx-5 mt-5">
+        <Card>
+          <CardHeader>
+            <CardTitle>Add Post</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Textarea placeholder="Type your message here." />
+          </CardContent>
+          <CardFooter>
+            <Button>Add Post</Button>
+          </CardFooter>
+        </Card>
+      </div>
+    )
+  }
   const renderPosts = () => {
     return posts.map((post) => <PostComponent key={post.title} {...post} />)
   }
   return (
     <>
-      <div className="flex flex-col gap-4 mx-5 pt-5">{renderPosts()}</div>
+      {renderAddPost()}
+      <div className="flex flex-col gap-4 mx-5 mt-5">{renderPosts()}</div>
     </>
   )
 }

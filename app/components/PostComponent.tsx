@@ -8,6 +8,7 @@ import {
 } from './ui/card'
 import { ChevronUp, ChevronDown } from 'lucide-react'
 import { Button } from './ui/button'
+
 export function PostComponent({
   title,
   author,
@@ -19,14 +20,17 @@ export function PostComponent({
   date: string
   content: string
 }) {
+  const handleCardClick = () => {
+    // This will be replaced with navigation logic in the future
+    console.log('Clicked on post:', title)
+  }
+
   return (
-    <Card>
+    <Card
+      className="cursor-pointer hover:shadow-md transition-shadow duration-300"
+      onClick={handleCardClick}
+    >
       <div className="flex flex-row">
-        <div className="flex flex-col bg-secondary px-5 items-center justify-center gap-2">
-          <ChevronUp className="cursor-not-allowed" />
-          <p>42</p>
-          <ChevronDown className="cursor-not-allowed" />
-        </div>
         <div>
           <CardHeader>
             <CardTitle>{title}</CardTitle>
@@ -35,6 +39,13 @@ export function PostComponent({
             </CardDescription>
           </CardHeader>
           <CardContent>{content}</CardContent>
+          <CardFooter>
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-muted-foreground">
+                💬 5 comments
+              </span>
+            </div>
+          </CardFooter>
         </div>
       </div>
     </Card>
