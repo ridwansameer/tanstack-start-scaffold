@@ -20,6 +20,11 @@ const fetchPosts = createServerFn('GET', async () => {
   const posts = await prisma.post.findMany({
     include: {
       author: true,
+      _count: {
+        select: {
+          comments: true,
+        },
+      },
     },
     orderBy: {
       createdAt: 'desc',
@@ -38,7 +43,7 @@ const createPost = createServerFn(
   },
 )
 
-export const Route = createFileRoute('/posts')({
+export const Route = createFileRoute('/posts/')({
   loader: async () => {
     const posts = await fetchPosts()
     return posts
@@ -48,7 +53,7 @@ export const Route = createFileRoute('/posts')({
 
 export function Posts() {
   const loaderPosts = useLoaderData({
-    from: '/posts',
+    from: '/posts/',
   })
   const [postTitle, setPostTitle] = useState('')
   const [postText, setPostText] = useState('')
@@ -110,6 +115,7 @@ export function Posts() {
   const renderPosts = () => {
     return data?.map((post: any) => (
       <PostComponent
+        id={post.id}
         title={post.title}
         author={post.author.username}
         date={(() => {
@@ -126,7 +132,10 @@ export function Posts() {
             return `${Math.floor(diffInSeconds / 3600)} hours ago`
           return `${Math.floor(diffInSeconds / 86400)} days ago`
         })()}
-        content={post.content}
+        content={
+          post.content.slice(0, 200) + (post.content.length > 200 ? '...' : '')
+        }
+        commentCount={5}
       />
     ))
   }
